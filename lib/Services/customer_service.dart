@@ -4,7 +4,7 @@ import 'package:frontend/Models/customer.dart';
 import 'package:http/http.dart' as http;
 
 class CustomerService{
-  final String baseUrl = 'http://localhost:8080/customer';
+  final String baseUrl = 'http://10.0.2.2:8080/customer';
   
   Future<List<Customer>> getCustomers() async{
     final response = await http.get(Uri.parse(baseUrl));

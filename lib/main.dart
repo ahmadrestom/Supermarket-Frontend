@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Customer/createCustomer.dart';
+import 'package:frontend/Customer/deleteCustomer.dart';
 import 'package:frontend/Customer/getAllCustomers.dart';
+import 'package:frontend/Customer/getCustomer.dart';
+import 'package:frontend/Customer/updateCustomer.dart';
 import 'package:frontend/CustomerPage.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/ItemPage.dart';
@@ -26,7 +30,11 @@ class MyApp extends StatelessWidget {
         '/customer':(context) => const CustomerPage(),
         '/item': (context)=> const ItemPage(),
         '/invoice':(context)=>const InvoicePage(),
-        '/getAllCustomers': (context)=>const GetAllCustomers()
+        '/getAllCustomers': (context)=>GetAllCustomers(),
+        '/GetCustomer': (context)=> const GetCustomer(),
+        '/CreateCustomer': (context)=> const CreateCustomer(),
+        '/UpdateCustomer': (context)=> const UpdateCustomer(),
+        '/DeleteCustomer': (context)=> const DeleteCustomer(),
       },
     );
   }
