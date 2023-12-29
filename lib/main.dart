@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Customer/getAllCustomers.dart';
 import 'package:frontend/CustomerPage.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/ItemPage.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/customer':(context) => const CustomerPage(),
         '/item': (context)=> const ItemPage(),
         '/invoice':(context)=>const InvoicePage(),
+        '/getAllCustomers': (context)=>const GetAllCustomers()
       },
     );
   }

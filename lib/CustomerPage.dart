@@ -9,9 +9,16 @@ class CustomerPage extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Customers'),
       ),
-      body: const Center(
-        child: Text(
-          'Welcome to the customers Page',
+      body:Center(
+        child: Column(
+          children:[
+            ElevatedButton(
+            onPressed: (){
+              Navigator.pushNamed(context, '/getAllCustomers');
+              },
+            child: const Text('Items'),
+      )
+          ],
         ),
       ),
     );
