@@ -22,8 +22,7 @@ class CustomerService{
 
   Future<Customer> getCustomerById(int customerId) async{
     final response = await http.get(Uri.parse('$baseUrl/$customerId'));
-
-    if(response.statusCode != 200){
+    if(response.statusCode == 200){
       Map<String, dynamic> jsonResponse = json.decode(response.body);
       return Customer.fromJson(jsonResponse);
     }else{

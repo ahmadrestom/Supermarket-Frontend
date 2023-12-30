@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
         '/item': (context)=> const ItemPage(),
         '/invoice':(context)=>const InvoicePage(),
         '/getAllCustomers': (context)=>GetAllCustomers(),
-        '/GetCustomer': (context)=> const GetCustomer(),
-        '/CreateCustomer': (context)=> const CreateCustomer(),
-        '/UpdateCustomer': (context)=> const UpdateCustomer(),
-        '/DeleteCustomer': (context)=> const DeleteCustomer(),
+        '/GetCustomer': (context)=> GetCustomer(),
+        '/CreateCustomer': (context)=>  CreateCustomer(),
+        '/UpdateCustomer': (context)=>  UpdateCustomer(),
+        '/DeleteCustomer': (context)=>  DeleteCustomer(),
       },
     );
   }
