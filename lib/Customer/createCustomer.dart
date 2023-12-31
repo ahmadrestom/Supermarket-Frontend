@@ -26,62 +26,108 @@ class _CreateCustomer extends State<CreateCustomer>{
         title: const Text('Create Customer'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            TextField(
-              controller: _customerName,
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                labelText: 'Enter customer name',
-                border: OutlineInputBorder(),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _customerName,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Enter customer name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _customerPhone,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                labelText: 'Enter customer phone number',
-                border: OutlineInputBorder(),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _customerEmail,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: 'Enter customer email',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _customerPhone,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: 'Enter customer phone number',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _customerAddress,
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                labelText: 'Enter customer address',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _customerEmail,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: 'Enter customer email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-                onPressed: (){
-                  String name = _customerName.text;
-                  String phone = _customerPhone.text;
-                  String email = _customerEmail.text;
-                  String address = _customerAddress.text;
+              const SizedBox(height: 20),
+              TextField(
+                controller: _customerAddress,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Enter customer address',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 50),
+              ElevatedButton(
+                  onPressed: (){
+                    String name = _customerName.text;
+                    String phone = _customerPhone.text;
+                    String email = _customerEmail.text;
+                    String address = _customerAddress.text;
 
-                  Customer newCustomer = Customer(id: 0,
-                      customerName: name,
-                      customerPhone: phone,
-                      customerAddress: address,
-                      customerEmail: email);
+                    if(name.isNotEmpty && phone.isNotEmpty && email.isNotEmpty && address.isNotEmpty) {
+                      Customer newCustomer = Customer(id: 0,
+                          customerName: name,
+                          customerPhone: phone,
+                          customerAddress: address,
+                          customerEmail: email);
+                      CustomerService().createCustomer(newCustomer);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context){
+                            return AlertDialog(
+                              title: const Text('Success'),
+                              content: const Text('Customer successfully created!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(); // Close the dialog
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          }
+                      );
 
-                  CustomerService().createCustomer(newCustomer);
-                },
-                child: const Text('Create new customer')
-            )
-          ],
+                    }else{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Please fill in all fields.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                  child: const Text('Create new customer')
+              )
+            ],
+          ),
         ),
       ),
     );
