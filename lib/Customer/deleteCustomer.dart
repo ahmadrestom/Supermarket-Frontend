@@ -38,7 +38,7 @@ class DeleteCustomer extends StatelessWidget{
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Done'),
+                        title: const Text('Success'),
                         content: const Text('Customer deleted successfully'),
                         actions: [
                           TextButton(
