@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Customer/createCustomer.dart';
-import 'package:frontend/Customer/deleteCustomer.dart';
-import 'package:frontend/Customer/getAllCustomers.dart';
-import 'package:frontend/Customer/getCustomer.dart';
-import 'package:frontend/Customer/updateCustomer.dart';
+import 'package:frontend/Category%20CRUD/getAllCategories.dart';
+import 'package:frontend/Category%20CRUD/getCategory.dart';
+import 'package:frontend/CategoryPage.dart';
+import 'package:frontend/Customer CRUD/createCustomer.dart';
+import 'package:frontend/Customer CRUD/deleteCustomer.dart';
+import 'package:frontend/Customer CRUD/getAllCustomers.dart';
+import 'package:frontend/Customer CRUD/getCustomer.dart';
+import 'package:frontend/Customer CRUD/updateCustomer.dart';
 import 'package:frontend/CustomerPage.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/ItemPage.dart';
@@ -31,10 +34,13 @@ class MyApp extends StatelessWidget {
         '/item': (context)=> const ItemPage(),
         '/invoice':(context)=>const InvoicePage(),
         '/getAllCustomers': (context)=>GetAllCustomers(),
-        '/GetCustomer': (context)=> GetCustomer(),
-        '/CreateCustomer': (context)=>  CreateCustomer(),
+        '/GetCustomer': (context)=> const GetCustomer(),
+        '/CreateCustomer': (context)=>  const CreateCustomer(),
         '/UpdateCustomer': (context)=>  UpdateCustomer(),
         '/DeleteCustomer': (context)=>  DeleteCustomer(),
+        '/category': (context)=> const CategoryPage(),
+        '/getAllCategories': (context)=> GetAllCategories(),
+        '/getCategory': (context)=> const GetCategory(),
       },
     );
   }
@@ -75,6 +81,13 @@ class _MyHomePageState extends StatelessWidget {
                   Navigator.pushNamed(context, '/invoice');
                 },
                 child: const Text('Invoices'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, '/category');
+                },
+                child: const Text('Categories'),
               ),
               const SizedBox(height: 20),
             ],
