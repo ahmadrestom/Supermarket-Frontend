@@ -13,6 +13,12 @@ import 'package:frontend/Customer CRUD/updateCustomer.dart';
 import 'package:frontend/CustomerPage.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/ItemPage.dart';
+import 'package:frontend/Supplier%20CRUD/createSupplier.dart';
+import 'package:frontend/Supplier%20CRUD/deleteSupplier.dart';
+import 'package:frontend/Supplier%20CRUD/getAllSuppliers.dart';
+import 'package:frontend/Supplier%20CRUD/getSupplier.dart';
+import 'package:frontend/Supplier%20CRUD/updateSupplier.dart';
+import 'package:frontend/SupplierPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +35,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
-      ),
+      )
+      ,
       initialRoute: '/',
       routes: {
         '/': (context) => _MyHomePageState(),
@@ -47,6 +54,13 @@ class MyApp extends StatelessWidget {
         '/createCategory': (context)=> const CreateCategory(),
         '/deleteCategory': (context)=> DeleteCategory(),
         '/updateCategory': (context)=> UpdateCategory(),
+        '/supplier': (context)=> const SupplierPage(),
+        '/getAllSuppliers': (context)=> GetAllSuppliers(),
+        '/getSupplier': (context)=> const GetSupplier(),
+        '/createSupplier': (context) => const CreateSupplier(),
+        '/deleteSupplier': (context) => DeleteSupplier(),
+        '/updateSupplier': (context) => UpdateSupplier(),
+
       },
     );
   }
@@ -96,6 +110,12 @@ class _MyHomePageState extends StatelessWidget {
                 child: const Text('Categories'),
               ),
               const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, '/supplier');
+                },
+                child: const Text('Suppliers'),
+              ),
             ],
         ),
       ),
