@@ -35,8 +35,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
-      )
-      ,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue.shade300,
+          elevation: 0,
+          centerTitle: true,
+        ),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => _MyHomePageState(),
@@ -71,54 +75,80 @@ class _MyHomePageState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text("Supermarket"),
           centerTitle: true,
     ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/customer');
-                  },
-                   child: const Text('Customers'),
-              ),
-              const SizedBox(height: 20),
-
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, '/item');
-                },
-                child: const Text('Items'),
-              ),
-              const SizedBox(height: 20),
-
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, '/invoice');
-                },
-                child: const Text('Invoices'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, '/category');
-                },
-                child: const Text('Categories'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, '/supplier');
-                },
-                child: const Text('Suppliers'),
-              ),
-            ],
-        ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        padding: const EdgeInsets.all(10.0),
+        mainAxisSpacing: 60.0,
+        crossAxisSpacing: 30.0,
+        children: [
+          _buildCard(context, 'Customers', '/customer', Icons.people, Colors.blue),
+          _buildCard(context, 'Items', '/item', Icons.inventory, Colors.green),
+          _buildCard(context, 'Invoices', '/invoice', Icons.receipt, Colors.orange),
+          _buildCard(context, 'Categories', '/category', Icons.category, Colors.purple),
+          _buildCard(context, 'Suppliers', '/supplier', Icons.people_alt, Colors.red),
+        ],
       ),
     );
   }
+}
+
+Widget _buildCard(BuildContext context, String title, String route, IconData icon, Color color) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, route);
+    },
+    child: Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      margin: const EdgeInsets.all(0),
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  size: 50.0,
+                  color: Colors.white,
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  splashColor: Colors.black.withOpacity(0.3),
+                  onTap: () {
+                    Navigator.pushNamed(context, route);
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
