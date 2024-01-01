@@ -1,6 +1,6 @@
 class Category{
-  late int categoryId;
-  late String categoryLabel;
+  int categoryId;
+  String categoryLabel;
 
   Category({required this.categoryId, required this.categoryLabel});
 

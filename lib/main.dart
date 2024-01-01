@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Category%20CRUD/createCategory.dart';
 import 'package:frontend/Category%20CRUD/getAllCategories.dart';
 import 'package:frontend/Category%20CRUD/getCategory.dart';
 import 'package:frontend/CategoryPage.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         '/category': (context)=> const CategoryPage(),
         '/getAllCategories': (context)=> GetAllCategories(),
         '/getCategory': (context)=> const GetCategory(),
+        '/createCategory': (context)=> const CreateCategory(),
       },
     );
   }
