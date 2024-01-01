@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Category%20CRUD/createCategory.dart';
+import 'package:frontend/Category%20CRUD/deleteCategory.dart';
 import 'package:frontend/Category%20CRUD/getAllCategories.dart';
 import 'package:frontend/Category%20CRUD/getCategory.dart';
+import 'package:frontend/Category%20CRUD/updateCategory.dart';
 import 'package:frontend/CategoryPage.dart';
 import 'package:frontend/Customer CRUD/createCustomer.dart';
 import 'package:frontend/Customer CRUD/deleteCustomer.dart';
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
         '/getAllCategories': (context)=> GetAllCategories(),
         '/getCategory': (context)=> const GetCategory(),
         '/createCategory': (context)=> const CreateCategory(),
+        '/deleteCategory': (context)=> DeleteCategory(),
+        '/updateCategory': (context)=> UpdateCategory(),
       },
     );
   }
