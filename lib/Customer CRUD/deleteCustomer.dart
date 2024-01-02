@@ -19,13 +19,22 @@ class DeleteCustomer extends StatelessWidget{
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+
           children: [
-            TextField(
-              controller: _idController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Enter Customer ID',
-                border: OutlineInputBorder(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextField(
+                controller: _idController,
+                keyboardType: TextInputType.number,
+                style: const TextStyle(fontSize: 16.0),
+                decoration: const InputDecoration(
+                  labelText: 'Enter Customer ID',
+                  border: InputBorder.none,
+                ),
               ),
             ),
             const SizedBox(height: 20),

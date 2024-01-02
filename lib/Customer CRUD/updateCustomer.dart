@@ -27,60 +27,15 @@ class UpdateCustomer extends StatelessWidget{
             children: [
               Column(
               children: [
-                TextField(
-                  controller: _customerId,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: 'Enter customer ID',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                _buildTextField(_customerId, 'Enter Customer ID', Icons.perm_identity, TextInputType.number),
                 const SizedBox(height: 20),
-                TextField(
-                  controller: _customerName,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: 'Enter customer name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                _buildTextField(_customerName, 'Enter Customer Name', Icons.person_2, TextInputType.text),
                 const SizedBox(height: 20),
-                TextField(
-                  controller: _customerPhone,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    labelText: 'Enter customer phone number',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                _buildTextField(_customerPhone, 'Enter Customer Phone Number', Icons.phone, TextInputType.phone),
                 const SizedBox(height: 20),
-                TextField(
-                  controller: _customerEmail,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: 'Enter customer email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                _buildTextField(_customerEmail, 'Enter Customer Email', Icons.email, TextInputType.emailAddress),
                 const SizedBox(height: 20),
-                TextField(
-                  controller: _customerAddress,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: 'Enter customer address',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                _buildTextField(_customerAddress, 'Enter Customer Address', Icons.location_on_outlined, TextInputType.streetAddress),
                 const SizedBox(height: 50),
                 ElevatedButton(
                     onPressed: (){
@@ -144,4 +99,18 @@ class UpdateCustomer extends StatelessWidget{
       ),
     );
   }
+}
+
+Widget _buildTextField(TextEditingController controller, String labelText, IconData icon, TextInputType inputType) {
+  return TextFormField(
+    controller: controller,
+    keyboardType: inputType,
+    style: const TextStyle(fontSize: 16),
+    decoration: InputDecoration(
+      labelText: labelText,
+      prefixIcon: Icon(icon),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+    ),
+  );
 }

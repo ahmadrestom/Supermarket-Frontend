@@ -10,45 +10,90 @@ class CustomerPage extends StatelessWidget{
         title: const Text('Customers'),
         centerTitle: true,
       ),
-      body:Center(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(6, 20, 6, 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children:[
-            ElevatedButton(
-            onPressed: (){
-              Navigator.pushNamed(context, '/getAllCustomers');
-              },
-            child: const Text('Get All Customers'),
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildCard(
+                    context,
+                    'Get All Customers',
+                    '/getAllCustomers',
+                    Icons.people,
+                    Colors.blue,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    context,
+                    'Get a Customer',
+                    '/GetCustomer',
+                    Icons.person,
+                    Colors.green,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    context,
+                    'Create Customer',
+                    '/CreateCustomer',
+                    Icons.person_add,
+                    Colors.orange,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    context,
+                    'Update Customer',
+                    '/UpdateCustomer',
+                    Icons.mode_edit_outline_outlined,
+                    Colors.purple,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    context,
+                    'Delete Customer',
+                    '/DeleteCustomer',
+                    Icons.delete,
+                    Colors.red,
+                  ),
+                ],
+              ),
             ),
-            ElevatedButton(
-              onPressed: (){
-                Navigator.pushNamed(context, '/GetCustomer');
-              },
-              child: const Text('Get a customer'),
-            ),
-            ElevatedButton(
-              onPressed: (){
-                Navigator.pushNamed(context, '/CreateCustomer');
-              },
-              child: const Text('Created customer'),
-            ),
-            ElevatedButton(
-              onPressed: (){
-                Navigator.pushNamed(context, '/UpdateCustomer');
-              },
-              child: const Text('Update customer'),
-            ),
-            ElevatedButton(
-              onPressed: (){
-                Navigator.pushNamed(context, '/DeleteCustomer');
-              },
-              child: const Text('Delete customer'),
-            )
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildCard(BuildContext context, String title, String route, IconData icon, Color color) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(6, 20, 6, 0),
+    child: Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, route);
+        },
+        borderRadius: BorderRadius.circular(15.0),
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: Colors.white,
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          tileColor: color,
+          contentPadding: const EdgeInsets.all(16.0),
+        ),
+      ),
+    ),
+  );
 }

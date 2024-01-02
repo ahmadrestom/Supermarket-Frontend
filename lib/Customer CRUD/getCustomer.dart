@@ -26,13 +26,22 @@ class _GetCustomerState extends State<GetCustomer> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+
           children: [
-            TextField(
-              controller: _idController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Enter Customer ID',
-                border: OutlineInputBorder(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextField(
+                controller: _idController,
+                keyboardType: TextInputType.number,
+                style: const TextStyle(fontSize: 16.0),
+                decoration: const InputDecoration(
+                  labelText: 'Enter Customer ID',
+                  border: InputBorder.none,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -65,47 +74,39 @@ class _GetCustomerState extends State<GetCustomer> {
               child: const Text('Get Customer'),
             ),
             const SizedBox(height: 20),
-              FutureBuilder<Customer>(
-                future: customerFuture,
-                builder: (context, snapshot)
-                {
-                  if(snapshot.connectionState == ConnectionState.waiting)
-                  {
-                    return const CircularProgressIndicator();
-                  }
-                  else if(snapshot.hasError)
-                    {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                  else if(snapshot.hasData)
-                    {
-                      final customer = snapshot.data!;
-                      return Card(
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0), // Adds rounded corners
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildText('Customer ID:', '${customer.id}'),
-                              _buildText('Name:', customer.customerName),
-                              _buildText('Phone:', customer.customerPhone),
-                              _buildText('Email:', customer.customerEmail),
-                              _buildText('Address:', customer.customerAddress),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                  else
-                    {
-                      return const SizedBox(height: 20,);
-                    }
-                },
-              ),
+            FutureBuilder<Customer>(
+              future: customerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  final customer = snapshot.data!;
+                  return Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildText('Customer ID:', '${customer.id}'),
+                          _buildText('Name:', customer.customerName),
+                          _buildText('Phone:', customer.customerPhone),
+                          _buildText('Email:', customer.customerEmail),
+                          _buildText('Address:', customer.customerAddress),
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
           ],
         ),
       ),
