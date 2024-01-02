@@ -30,76 +30,58 @@ class _CreateSupplier extends State<CreateSupplier>{
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              TextField(
-                controller: _supplierName,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: 'Enter supplier name',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
+              _buildTextField(_supplierName, 'Supplier Name', Icons.person, TextInputType.text),
               const SizedBox(height: 20),
-              TextField(
-                controller: _supplierPhone,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: 'Enter supplier phone number',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
+              _buildTextField(_supplierPhone, 'Phone Number', Icons.phone, TextInputType.phone),
               const SizedBox(height: 50),
               ElevatedButton(
-                  onPressed: (){
-                    String name = _supplierName.text;
-                    String phone = _supplierPhone.text;
+                onPressed: () {
+                  String name = _supplierName.text;
+                  String phone = _supplierPhone.text;
 
-                    if(name.isNotEmpty && phone.isNotEmpty) {
-                      Supplier supplier = Supplier(supplierId: 0,
-                          supplierName: name,
-                          supplierPhone: phone,
-                      );
-                     SupplierService().createSupplier(supplier);
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context){
-                            return AlertDialog(
-                              title: const Text('Success'),
-                              content: const Text('Supplier successfully created!'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(); // Close the dialog
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          }
-                      );
-
-                    }else{
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Error'),
-                            content: const Text('Please fill in all fields.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
-                  },
-                  child: const Text('Create new supplier')
+                  if (name.isNotEmpty && phone.isNotEmpty) {
+                    Supplier supplier = Supplier(
+                      supplierId: 0,
+                      supplierName: name,
+                      supplierPhone: phone,
+                    );
+                    SupplierService().createSupplier(supplier);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Success'),
+                          content: const Text('Supplier successfully created!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Please fill in all fields.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: const Text('Create new supplier'),
               )
             ],
           ),
@@ -107,4 +89,18 @@ class _CreateSupplier extends State<CreateSupplier>{
       ),
     );
   }
+}
+
+Widget _buildTextField(TextEditingController controller, String labelText, IconData icon, TextInputType inputType) {
+  return TextFormField(
+    controller: controller,
+    keyboardType: inputType,
+    style: const TextStyle(fontSize: 16),
+    decoration: InputDecoration(
+      labelText: labelText,
+      prefixIcon: Icon(icon),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+    ),
+  );
 }

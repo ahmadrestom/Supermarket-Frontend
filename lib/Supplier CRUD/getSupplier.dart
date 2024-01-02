@@ -27,12 +27,20 @@ class _GetSupplierState extends State<GetSupplier> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _idController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Enter Supplier ID',
-                border: OutlineInputBorder(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextField(
+                controller: _idController,
+                keyboardType: TextInputType.number,
+                style: const TextStyle(fontSize: 16.0),
+                decoration: const InputDecoration(
+                  labelText: 'Enter Supplier ID',
+                  border: InputBorder.none,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -70,11 +78,11 @@ class _GetSupplierState extends State<GetSupplier> {
               {
                 if(snapshot.connectionState == ConnectionState.waiting)
                 {
-                  return const CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
                 else if(snapshot.hasError)
                 {
-                  return Text('Error: ${snapshot.error}');
+                  return Center(child: Text('Error: ${snapshot.error}'));
                 }
                 else if(snapshot.hasData)
                 {
@@ -82,10 +90,10 @@ class _GetSupplierState extends State<GetSupplier> {
                   return Card(
                     elevation: 5,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0), // Adds rounded corners
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -99,7 +107,7 @@ class _GetSupplierState extends State<GetSupplier> {
                 }
                 else
                 {
-                  return const SizedBox(height: 20,);
+                  return const SizedBox();
                 }
               },
             ),

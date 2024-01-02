@@ -27,19 +27,48 @@ class GetAllSuppliers extends StatelessWidget{
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Supplier supplier = snapshot.data![index];
-                return Expanded(
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                   child: Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Supplier ID: ${supplier.supplierId}'),
-                          const SizedBox(height: 8.0),
-                          Text('Supplier Name: ${supplier.supplierName}'),
-                          Text('Supplier Phone: ${supplier.supplierPhone}'),
-                        ],
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const CircleAvatar(
+                                  backgroundColor: Colors.blue,
+                                  child: Icon(
+                                    Icons.store,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'ID: ${supplier.supplierId}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8.0),
+                            Text(
+                              'Supplier Name: ${supplier.supplierName}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text('Supplier Phone: ${supplier.supplierPhone}'),
+                          ],
+                        ),
                       ),
                     ),
                   ),
