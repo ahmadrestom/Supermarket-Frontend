@@ -27,16 +27,7 @@ class _CreateCategory extends State<CreateCategory>{
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              TextField(
-                controller: _categoryLabel,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: 'Enter category label',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
+              _buildTextField(_categoryLabel, 'Enter Category Label', Icons.add, TextInputType.text),
               const SizedBox(height: 20),
 
               const SizedBox(height: 50),
@@ -94,4 +85,18 @@ class _CreateCategory extends State<CreateCategory>{
       ),
     );
   }
+}
+
+Widget _buildTextField(TextEditingController controller, String labelText, IconData icon, TextInputType inputType) {
+  return TextFormField(
+    controller: controller,
+    keyboardType: inputType,
+    style: const TextStyle(fontSize: 16),
+    decoration: InputDecoration(
+      labelText: labelText,
+      prefixIcon: Icon(icon),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+    ),
+  );
 }

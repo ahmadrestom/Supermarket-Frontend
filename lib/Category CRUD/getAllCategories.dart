@@ -27,18 +27,35 @@ class GetAllCategories extends StatelessWidget{
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Category category = snapshot.data![index];
-                return Expanded(
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                   child: Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Category ID: ${category.categoryId}'),
-                          const SizedBox(height: 8.0),
-                          Text('Label: ${category.categoryLabel}'),
-                        ],
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'ID: ${category.categoryId}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            Text(
+                              'Label: ${category.categoryLabel}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
