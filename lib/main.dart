@@ -13,6 +13,7 @@ import 'package:frontend/Customer CRUD/updateCustomer.dart';
 import 'package:frontend/CustomerPage.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/Item%20CRUD/getAllItems.dart';
+import 'package:frontend/Item%20CRUD/getItem.dart';
 import 'package:frontend/ItemPage.dart';
 import 'package:frontend/Supplier%20CRUD/createSupplier.dart';
 import 'package:frontend/Supplier%20CRUD/deleteSupplier.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         '/deleteSupplier': (context) => DeleteSupplier(),
         '/updateSupplier': (context) => UpdateSupplier(),
         '/getAllItems': (context)=> GetAllItems(),
+        '/getItem': (context)=> const GetItem(),
       },
     );
   }

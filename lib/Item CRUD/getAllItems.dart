@@ -69,7 +69,7 @@ class GetAllItems extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 4.0),
-                            Text('Price: ${item.itemPrice}'),
+                            Text('Price: \$${item.itemPrice}'),
                             Text('Quantity: ${item.itemQuantity}'),
                           ],
                         ),
