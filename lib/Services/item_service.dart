@@ -61,7 +61,7 @@ class ItemService{
   Future<void> deleteItem(int itemId) async{
     final response = await http.delete(Uri.parse('$baseUrl/$itemId'));
 
-    if(response.statusCode != 200){
+    if(response.statusCode != 200) {
       throw Exception('Failed to delete item');
     }
   }

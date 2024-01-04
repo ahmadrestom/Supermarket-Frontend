@@ -1,7 +1,7 @@
 class Supplier{
   int supplierId;
-  String supplierName;
-  String supplierPhone;
+  late String supplierName;
+  late String supplierPhone;
 
   Supplier({required this.supplierId, required this.supplierName, required this.supplierPhone});
 

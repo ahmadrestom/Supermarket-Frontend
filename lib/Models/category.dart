@@ -1,8 +1,9 @@
 class Category{
   int categoryId;
-  String categoryLabel;
+  late String categoryLabel;
 
   Category({required this.categoryId, required this.categoryLabel});
+
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
