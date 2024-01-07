@@ -5,7 +5,7 @@ class Item{
   final int itemId;
   final String itemName;
   final double itemPrice;
-  final int itemQuantity;
+  int itemQuantity;
   final Category category;
   final Supplier supplier;
 

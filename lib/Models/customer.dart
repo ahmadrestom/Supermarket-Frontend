@@ -29,5 +29,21 @@ class Customer{
     };
   }
 
+  factory Customer.forInvoice({ //for creating invoice
+    required int id,
+    String? customerName,
+    String? customerPhone,
+    String? customerAddress,
+    String? customerEmail,
+  }) {
+    return Customer(
+      id: id,
+      customerName: customerName ?? '',
+      customerPhone: customerPhone ?? '',
+      customerAddress: customerAddress ?? '',
+      customerEmail: customerEmail ?? '',
+    );
+  }
+
 
 }

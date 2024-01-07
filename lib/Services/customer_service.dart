@@ -65,4 +65,14 @@ class CustomerService{
       throw Exception('Failed to delete customer');
     }
   }
+
+  Future<bool> doesCustomerExist(int customerId) async {
+    try {
+      await getCustomerById(customerId);
+      return true; // Customer with the provided ID exists
+    } catch (e) {
+      return false; // Customer with the provided ID does not exist
+    }
+  }
+
 }

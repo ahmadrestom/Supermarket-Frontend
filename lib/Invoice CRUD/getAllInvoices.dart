@@ -69,7 +69,7 @@ class GetAllInvoices extends StatelessWidget {
                             ),
                             const SizedBox(height: 8.0),
                             Text(
-                              'Date: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(invoice.invoiceDate)}',
+                              'Date: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(invoice.invoiceDate!)}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),

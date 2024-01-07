@@ -3,13 +3,13 @@ import 'invoice_item.dart';
 
 class Invoice {
   final int invoiceId;
-  final DateTime invoiceDate;
+  DateTime? invoiceDate;
   final double totalAmount;
   final Customer customer;
   final List<InvoiceItem> invoiceItems;
 
   Invoice(
-      {required this.invoiceId, required this.invoiceDate, required this.totalAmount,
+      {required this.invoiceId,  this.invoiceDate, required this.totalAmount,
         required this.customer, required this.invoiceItems});
 
 

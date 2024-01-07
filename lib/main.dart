@@ -11,6 +11,7 @@ import 'package:frontend/Customer CRUD/getAllCustomers.dart';
 import 'package:frontend/Customer CRUD/getCustomer.dart';
 import 'package:frontend/Customer CRUD/updateCustomer.dart';
 import 'package:frontend/CustomerPage.dart';
+import 'package:frontend/Invoice%20CRUD/createInvoice.dart';
 import 'package:frontend/Invoice%20CRUD/getAllInvoices.dart';
 import 'package:frontend/Invoice%20CRUD/getInvoice.dart';
 import 'package:frontend/InvoicePage.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
         '/updateItem': (context)=> const UpdateItem(),
         '/getAllInvoices': (context)=> GetAllInvoices(),
         '/getInvoice': (context) => const GetInvoice(),
+        '/createInvoice': (context)=> const CreateInvoice(),
       },
     );
   }

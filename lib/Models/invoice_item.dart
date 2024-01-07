@@ -27,6 +27,17 @@ class InvoiceItem{
     );
   }
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is InvoiceItem &&
+              runtimeType == other.runtimeType &&
+              item == other.item &&
+              quantity == other.quantity;
+
+  @override
+  int get hashCode => item.hashCode ^ quantity.hashCode;
+
 
 
 
