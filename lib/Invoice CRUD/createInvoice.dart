@@ -42,6 +42,7 @@ class _CreateInvoice extends State<CreateInvoice>{
   void addItem(Item item){
     setState(() {
       invoiceItems.add(InvoiceItem(invoiceItemId: 0, quantity: 1, subtotal: item.itemPrice, item: item));
+      item.itemQuantity -=1;
     });
   }
 
@@ -102,7 +103,18 @@ class _CreateInvoice extends State<CreateInvoice>{
                           ),
                           trailing: ElevatedButton(
                             onPressed: () {
-                              addItem(_searchResult[index]);
+                              if(_searchResult[index].itemQuantity > 0) {
+                                addItem(_searchResult[index]);
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Item is not available at the moment'),
+                                  ),
+                                );
+
+                              }
+
                             },
                             child: const Text('Add'),
                           ),
@@ -219,7 +231,7 @@ class _SelectedItem extends State<SelectedItemsPage> {
                 String customerId = widget.customerId;
                 int customerIid = int.tryParse(customerId) ?? 0;
 
-                if (customerIid != 0 && widget.uniqueItemList.isNotEmpty) {
+                if (customerIid != 0) {
                   CustomerService().doesCustomerExist(customerIid).then((doesExist) {
                     if (doesExist) {
                       Invoice invoice = Invoice(
@@ -229,25 +241,34 @@ class _SelectedItem extends State<SelectedItemsPage> {
                         customer: Customer.forInvoice(id: customerIid),
                         invoiceItems: widget.uniqueItemList,
                       );
-                      InvoiceService().createInvoice(invoice);
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Success'),
-                            content: const Text('Invoice successfully created!'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      if(widget.uniqueItemList.isNotEmpty) {
+                        InvoiceService().createInvoice(invoice);
+                        Navigator.of(context).popUntil(ModalRoute.withName('/invoice'));
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Success'),
+                              content: const Text('Invoice successfully created!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }else{
+                        Navigator.of(context).popUntil(ModalRoute.withName('/invoice'));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('No items selected'),
+                          ),
+                        );
+                      }
                     } else {
                       showDialog(
                         context: context,
