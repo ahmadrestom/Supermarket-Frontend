@@ -15,6 +15,7 @@ import 'package:frontend/Invoice%20CRUD/createInvoice.dart';
 import 'package:frontend/Invoice%20CRUD/deleteInvoice.dart';
 import 'package:frontend/Invoice%20CRUD/getAllInvoices.dart';
 import 'package:frontend/Invoice%20CRUD/getInvoice.dart';
+import 'package:frontend/Invoice%20CRUD/getInvoicesForCustomer.dart';
 import 'package:frontend/InvoicePage.dart';
 import 'package:frontend/Item%20CRUD/createItem.dart';
 import 'package:frontend/Item%20CRUD/deleteItem.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
         '/getInvoice': (context) => const GetInvoice(),
         '/createInvoice': (context)=> const CreateInvoice(),
         '/deleteInvoice': (context)=> DeleteInvoice(),
+        '/getInvoiceByCustomer': (context)=> const GetInvoicesForCustomer(),
       },
     );
   }

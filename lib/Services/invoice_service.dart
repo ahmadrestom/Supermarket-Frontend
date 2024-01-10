@@ -4,6 +4,20 @@ import '../Models/invoice.dart';
 
 class InvoiceService{
   final String baseUrl = 'http://10.0.2.2:8080/invoice';
+  
+  Future<List<Invoice>> getInvoicesForCustomer(int customerId) async{
+    final response = await http.get(Uri.parse('$baseUrl/CustomerInvoices/$customerId'));
+    if(response.statusCode == 200)
+    {
+      List<dynamic> jsonResponse = json.decode(response.body);
+      return jsonResponse.map((data) => Invoice.fromJson(data)).toList();
+    }
+    else
+    {
+      throw Exception('Failed to load invoices');
+    }
+
+  }
 
   Future<List<Invoice>> getInvoices() async{
     final response = await http.get(Uri.parse(baseUrl));
@@ -11,6 +25,7 @@ class InvoiceService{
     if(response.statusCode == 200)
     {
       List<dynamic> jsonResponse = json.decode(response.body);
+      //print(jsonResponse.map((e) => Invoice.fromJson(e).customer.customerName));
       return jsonResponse.map((data) => Invoice.fromJson(data)).toList();
     }
     else

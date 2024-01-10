@@ -236,9 +236,9 @@ class _SelectedItem extends State<SelectedItemsPage> {
                     if (doesExist) {
                       Invoice invoice = Invoice(
                         invoiceId: 0,
-                        invoiceDate: null,
+                        invoiceDate: DateTime.now(),
                         totalAmount: 0,
-                        customer: Customer.forInvoice(id: customerIid),
+                        customer: Customer.forInvoice1(id: customerIid),
                         invoiceItems: widget.uniqueItemList,
                       );
                       if(widget.uniqueItemList.isNotEmpty) {

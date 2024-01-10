@@ -27,10 +27,18 @@ class InvoicePage extends StatelessWidget{
                   const SizedBox(height: 10),
                   _buildCard(
                     context,
-                    'Get an Invoice',
+                    'Get an Invoice By ID',
                     '/getInvoice',
-                    Icons.person,
+                    Icons.numbers,
                     Colors.green,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    context,
+                    'Get an Invoice By Customer ID',
+                    '/getInvoiceByCustomer',
+                    Icons.person_2_outlined,
+                    Colors.purple,
                   ),
                   const SizedBox(height: 10),
                   _buildCard(
@@ -39,14 +47,6 @@ class InvoicePage extends StatelessWidget{
                     '/createInvoice',
                     Icons.person_add,
                     Colors.orange,
-                  ),
-                  const SizedBox(height: 10),
-                  _buildCard(
-                    context,
-                    'Update Invoice',
-                    '/updateInvoice',
-                    Icons.mode_edit_outline_outlined,
-                    Colors.purple,
                   ),
                   const SizedBox(height: 10),
                   _buildCard(

@@ -1,15 +1,14 @@
 class Customer{
-  int id;
-  String customerName;
-  String customerPhone;
-  String customerAddress;
-  String customerEmail;
+  final int id;
+  final String customerName;
+  final String customerPhone;
+  final String customerAddress;
+  final String customerEmail;
 
   Customer({required this.id, required this.customerName, required this.customerPhone,
       required this.customerAddress, required this.customerEmail});
 
-
-  factory Customer.fromJson(Map<String, dynamic> json) { //getting cstomer
+  factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
       id: json['customer_id'] as int,
       customerName: json['customer_name'] as String,
@@ -19,7 +18,7 @@ class Customer{
     );
   }
 
-  Map<String, dynamic> toJson() { //sending customer
+  Map<String, dynamic> toJson() {
     return {
       'customer_id': id,
       'customer_name': customerName,
@@ -29,7 +28,7 @@ class Customer{
     };
   }
 
-  factory Customer.forInvoice({ //for creating invoice
+  factory Customer.forInvoice1({
     required int id,
     String? customerName,
     String? customerPhone,
@@ -38,6 +37,21 @@ class Customer{
   }) {
     return Customer(
       id: id,
+      customerName: customerName ?? '',
+      customerPhone: customerPhone ?? '',
+      customerAddress: customerAddress ?? '',
+      customerEmail: customerEmail ?? '',
+    );
+  }
+  factory Customer.forInvoice2({
+    int? id,
+    String? customerName,
+    String? customerPhone,
+    String? customerAddress,
+    String? customerEmail,
+  }) {
+    return Customer(
+      id: id ?? 0,
       customerName: customerName ?? '',
       customerPhone: customerPhone ?? '',
       customerAddress: customerAddress ?? '',

@@ -1,7 +1,7 @@
 import 'package:frontend/Models/item.dart';
 
 class InvoiceItem{
-  int invoiceItemId;
+  final int invoiceItemId;
   int quantity;
   double subtotal;
   Item item;

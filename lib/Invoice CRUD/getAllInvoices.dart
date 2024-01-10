@@ -86,7 +86,7 @@ class GetAllInvoices extends StatelessWidget {
               },
             );
           } else {
-            return const Center(child: Text('No customers available'));
+            return const Center(child: Text('No invoices available'));
           }
         },
       ),

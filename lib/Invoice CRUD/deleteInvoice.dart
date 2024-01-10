@@ -58,7 +58,7 @@ class DeleteInvoice extends StatelessWidget{
                 } else {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) {
+                    builder: (BuildContext context){
                       return AlertDialog(
                         title: const Text('Error'),
                         content: const Text('Please enter a valid invoice ID.'),
