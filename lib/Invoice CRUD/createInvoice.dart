@@ -19,11 +19,19 @@ class CreateInvoice extends StatefulWidget{
 
 class _CreateInvoice extends State<CreateInvoice>{
 
-  final TextEditingController _id = TextEditingController();
   final TextEditingController _searchQuery = TextEditingController();
   final ItemService itemService = ItemService();
   List<InvoiceItem> invoiceItems = [];
   List<Item> _searchResult = [];
+
+  late Future<List<Customer>> customers;
+  Customer? _selectedCustomer;
+
+  @override
+  void initState(){
+    super.initState();
+    customers = CustomerService().getCustomers();
+  }
 
   Future<void> performSearch(String query) async{
     try{
@@ -60,18 +68,60 @@ class _CreateInvoice extends State<CreateInvoice>{
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              TextFormField(
-                controller: _id,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(fontSize: 16),
-                decoration: InputDecoration(
-                  labelText: "Enter customer id",
-                  prefixIcon: const Icon(Icons.numbers),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
-                ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 30),
+                child: FutureBuilder<List<Customer>>(
+                  future: customers,
+                  builder: (context, snapshot){
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text('No suppliers available');
+                    }else{
+                      List<Customer> customerList = snapshot.data!;
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.white,
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3)
+                            ),
+                          ],
+                        ),
+                        child: DropdownButtonFormField<Customer>(
+                          decoration: InputDecoration(
+                            labelText: 'Select a customer',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          ),
+                          value: _selectedCustomer,
+                          onChanged: (Customer? newValue) {
+                            setState(() {
+                              _selectedCustomer = newValue;
+                            });
+                          },
+                          items: customerList.map<DropdownMenuItem<Customer>>(
+                                (Customer value) {
+                              return DropdownMenuItem<Customer>(
+                                value: value,
+                                child: Text('${value.id} - ${value.customerName}'),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      );
+                    }
+                  },
+                )
               ),
-              const SizedBox(height: 20), // Spacer
+
               TextField(
                 controller: _searchQuery,
                 keyboardType: TextInputType.text,
@@ -132,7 +182,7 @@ class _CreateInvoice extends State<CreateInvoice>{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SelectedItemsPage(uniqueItemList: uniqueItemList, customerId: _id.text),
+                        builder: (context) => SelectedItemsPage(uniqueItemList: uniqueItemList, customerId: _selectedCustomer!.id, customerName: _selectedCustomer!.customerName),
                       ),
                     );
                   },
@@ -155,11 +205,13 @@ class _CreateInvoice extends State<CreateInvoice>{
 
 class SelectedItemsPage extends StatefulWidget {
   final List<InvoiceItem> uniqueItemList;
-  final String customerId;
+  final int customerId;
+  final String customerName;
   const SelectedItemsPage({
     Key? key,
     required this.uniqueItemList,
     required this.customerId,
+    required this.customerName
   }) : super(key: key);
 
   @override
@@ -228,8 +280,7 @@ class _SelectedItem extends State<SelectedItemsPage> {
             padding: const EdgeInsets.fromLTRB(15,0,15,50),
             child: ElevatedButton(
               onPressed: () {
-                String customerId = widget.customerId;
-                int customerIid = int.tryParse(customerId) ?? 0;
+                int customerIid = widget.customerId;
 
                 if (customerIid != 0) {
                   CustomerService().doesCustomerExist(customerIid).then((doesExist) {

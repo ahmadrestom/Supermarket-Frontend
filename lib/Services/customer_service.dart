@@ -20,6 +20,19 @@ class CustomerService{
       }
   }
 
+  Future<Customer> getCustomerByName(String customerName) async{
+    final response = await http.get(Uri.parse('$baseUrl/byname/$customerName'));
+    if(response.statusCode == 200)
+      {
+        Map<String, dynamic> jsonResponse = json.decode(response.body);
+        return Customer.fromJson(jsonResponse);
+      }
+    else
+      {
+        throw Exception('Failed to load customer');
+      }
+  }
+
   Future<Customer> getCustomerById(int customerId) async{
     final response = await http.get(Uri.parse('$baseUrl/$customerId'));
     if(response.statusCode == 200){

@@ -13,7 +13,7 @@ class GetInvoicesForCustomer extends StatefulWidget {
 
 class _GetInvoicesForCustomerState extends State<GetInvoicesForCustomer>{
   Future<List<Invoice>>? invoiceFuture;
-  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class _GetInvoicesForCustomerState extends State<GetInvoicesForCustomer>{
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: TextField(
-                controller: _idController,
-                keyboardType: TextInputType.number,
+                controller: _nameController,
+                keyboardType: TextInputType.text,
                 style: const TextStyle(fontSize: 16.0),
                 decoration: const InputDecoration(
-                  labelText: 'Enter Customer ID',
+                  labelText: 'Enter Customer Name',
                   border: InputBorder.none,
                 ),
               ),
@@ -45,29 +45,11 @@ class _GetInvoicesForCustomerState extends State<GetInvoicesForCustomer>{
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                int customerId = int.tryParse(_idController.text) ?? 0;
-                if (customerId != 0) {
-                  setState(() {
-                    invoiceFuture = InvoiceService().getInvoicesForCustomer(customerId);
-                  });
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Error'),
-                        content: const Text('Please enter a valid customer ID.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
+                String customerName = _nameController.text;
+                setState(() {
+                  invoiceFuture = InvoiceService().getInvoicesForCustomer(customerName);
+                });
+                            },
               child: const Text('Get Invoices'),
             ),
             const SizedBox(height: 20),
@@ -79,7 +61,7 @@ class _GetInvoicesForCustomerState extends State<GetInvoicesForCustomer>{
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
@@ -162,7 +144,7 @@ class _GetInvoicesForCustomerState extends State<GetInvoicesForCustomer>{
                       },
                     );
                   } else {
-                    return const SizedBox(); // or any other widget you prefer
+                    return const SizedBox();
                   }
                 },
               ),
